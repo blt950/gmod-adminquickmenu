@@ -1,5 +1,5 @@
 --[[
-	This script has been purchased for "Admin Quickmenu" from ScriptFodder.com
+	This script has been purchased for "Admin Quick Menu" from ScriptFodder.com
 	© 2017 Blt950 do not share, re-distribute or modify
 	without permission.
 --]]
@@ -428,5 +428,5 @@ function hasAccess(cmd)
 end	
 
 function chatError(string)
-	chat.AddText(Color(200,100,100),"Admin Quickmenu: "..string)
+	chat.AddText(Color(200,100,100),"Admin Quick Menu: "..string)
 end

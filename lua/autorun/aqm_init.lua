@@ -1,5 +1,5 @@
 --[[
-	This script has been purchased for "Admin Quickmenu" from ScriptFodder.com
+	This script has been purchased for "Admin Quick Menu" from ScriptFodder.com
 	© 2017 Blt950 do not share, re-distribute or modify
 	without permission.
 --]]
@@ -33,10 +33,10 @@ end
 // Set the current admin mod
 if istable(ulx) then
 	aqm.adminMod = "ulx"
-	print(":: Admin Quickmenu: Initalized with ULX as admin mod ::")
+	print(":: Admin Quick Menu: Initalized with ULX as admin mod ::")
 elseif istable(FAdmin) then
 	aqm.adminMod = "fadmin"
-	print(":: Admin Quickmenu: Initalized with FAdmin as admin mod ::")
+	print(":: Admin Quick Menu: Initalized with FAdmin as admin mod ::")
 else
-	ErrorNoHalt(":: Admin Quickmenu: No admin mod found. Make sure it's installed and supported by this plugin ::")
+	ErrorNoHalt(":: Admin Quick Menu: No admin mod found. Make sure it's installed and supported by this plugin ::")
 end

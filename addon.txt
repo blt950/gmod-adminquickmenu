@@ -1,9 +1,9 @@
 "AddonInfo"
 {
-	"name"				"Admin Quickmenu"
+	"name"				"Admin Quick Menu"
 	"version"			"1.0"
 	"author_name"		"Blt950"
 	"author_url"		"http://www.blt950.com/"
-	"info"				"Quickmenu for selected admin mods, inspired by Assmenu"
+	"info"				"Quick menu for selected admin mods, inspired by Assmod"
 	"override"			"0"
 }
