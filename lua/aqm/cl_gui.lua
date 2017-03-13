@@ -23,38 +23,60 @@ function aqm.showMenu()
 	menu:AddSpacer()
 
 
-	// Kick menu
-	local KICK_SUBMENU, KICK_SUBMENU_ICO = menu:AddSubMenu( aqm.interfaces.kick.label )
-	KICK_SUBMENU_ICO:SetImage( aqm.interfaces.kick.icon )
+	// Draw the menus
 
-	local count = 0
-	for k,v in pairs(player.GetAll()) do
-		count = count + 1
+	for ikey, interface in pairs(aqm.interfaces) do
 
-		if aqm.interfaces.kick.draw["ulx"].playerSelect then
+		local MENU_PRIMARY, MENU_ICO = menu:AddSubMenu( interface.label )
+		MENU_ICO:SetImage( interface.icon )
 
-			
-			
-			local KICK_SUBMENUREASON = KICK_SUBMENU:AddSubMenu(v:Name())
+		local noPly = #player.GetAll() == 0
+		for _,ply in pairs(player.GetAll()) do
+
+			local MENU_SECONDARY = nil
+			local MENU_TERTIARY = nil
+
+			if interface.draw["ulx"].playerSelect then
+
+				if interface.draw["ulx"].reasonSelect then
+					MENU_SECONDARY = MENU_PRIMARY:AddSubMenu(ply:Name())
+				else
+					MENU_PRIMARY:AddOption(ply:Name(), function()
+
+						Derma_StringRequest(
+							interface.label, 
+							"Write your reason below to "..string.lower(interface.label).." "..ply:Name(), 
+							nil, 
+							function(text) interface.draw["ulx"].endPointFunc(ply, text) end,
+							nil, 
+							interface.label
+						)
+
+				 	end)
+				end
+
+				if interface.draw["ulx"].reasonSelect then
+					for x, y in pairs(interface.draw["ulx"].reasonTable) do
+						MENU_SECONDARY:AddOption(y, function() interface.draw["ulx"].endPointFunc(ply, y) end)
+					end
+
+					if interface.draw["ulx"].reasonCustom then
+						MENU_SECONDARY:AddSpacer()
+						MENU_SECONDARY:AddOption("Custom reason", function()
+							Derma_StringRequest(
+								interface.label, 
+								"Write your reason below to "..string.lower(interface.label).." "..ply:Name(), 
+								nil, 
+								function(text) interface.draw["ulx"].endPointFunc(ply, text) end,
+								nil, 
+								interface.label
+							)
+					 	end)
+					end
+				end
+			end
 		end
-
-		if aqm.interfaces.kick.draw["ulx"].reasonSelect then
-
-		end
-
-		/*local KICK_SUBMENUREASON = KICK_SUBMENU:AddSubMenu(v:Name())
-		for x, y in pairs(ulx.common_kick_reasons) do
-			KICK_SUBMENUREASON:AddOption(y, function() RunConsoleCommand("ulx", "kick", v:Name(), y) end)
-		end
-		KICK_SUBMENUREASON:AddSpacer()
-		KICK_SUBMENUREASON:AddOption("Custom reason", function()
-			Derma_StringRequest( "Kick", "Write your kick reason below to kick "..v:Name(), nil, function(text) RunConsoleCommand("ulx", "kick", v:Name(), text) end, function() end )
-	 	end) */
-
-
 	end
-	if count == 0 then KICK_SUBMENU:AddOption("(None)", function() end) end
-
 
 
 	/* KICK MENU */
@@ -86,7 +108,7 @@ function aqm.showMenu()
 		for k,v in pairs(player.GetAll()) do
 			count = count + 1
 			local BAN_SUBMENULENGTH = BAN_SUBMENU:AddSubMenu(v:Name())
-			for x, y in ipairs(aqm.banLengths) do
+			for x, y in ipairs(aqm.config.banLengths) do
 				local BAN_SUBMENUREASON = BAN_SUBMENULENGTH:AddSubMenu(y.Str)
 				for q, w in pairs(ulx.common_kick_reasons) do
 					BAN_SUBMENUREASON:AddOption(w, function() RunConsoleCommand("ulx", "ban", v:Name(), y.Len, w) end)
@@ -120,7 +142,7 @@ function aqm.showMenu()
 		for k,v in pairs(player.GetAll()) do
 			count = count + 1
 			local FUN_SUBMENU_HEALTH_AMOUNT = FUN_SUBMENU_HEALTH:AddSubMenu(v:Name())
-			for x, y in ipairs(aqm.defaultValues) do
+			for x, y in ipairs(aqm.config.defaultValues) do
 				FUN_SUBMENU_HEALTH_AMOUNT:AddOption(y.Str, function() RunConsoleCommand("ulx", "hp", v:Name(), y.Len) end)
 			end
 		end
@@ -133,7 +155,7 @@ function aqm.showMenu()
 		for k,v in pairs(player.GetAll()) do
 			count = count + 1
 			local FUN_SUBMENU_ARMOR_AMOUNT = FUN_SUBMENU_ARMOR:AddSubMenu(v:Name())
-			for x, y in ipairs(aqm.defaultValues) do
+			for x, y in ipairs(aqm.config.defaultValues) do
 				FUN_SUBMENU_ARMOR_AMOUNT:AddOption(y.Str, function() RunConsoleCommand("ulx", "armor", v:Name(), y.Len) end)
 			end
 		end
@@ -147,7 +169,7 @@ function aqm.showMenu()
 		for k,v in pairs(player.GetAll()) do
 			count = count + 1
 			local FUN_SUBMENU_BLIND_AMOUNT = FUN_SUBMENU_BLIND:AddSubMenu(v:Name())
-			for x, y in ipairs(aqm.defaultValues) do
+			for x, y in ipairs(aqm.config.defaultValues) do
 				FUN_SUBMENU_BLIND_AMOUNT:AddOption(y.Str, function() RunConsoleCommand("ulx", "blind", v:Name(), y.Len) end)
 			end
 		end
@@ -190,7 +212,7 @@ function aqm.showMenu()
 		for k,v in pairs(player.GetAll()) do
 			count = count + 1
 			local FUN_SUBMENU_JAIL_AMOUNT = FUN_SUBMENU_JAIL:AddSubMenu(v:Name())
-			for x, y in ipairs(aqm.jailValues) do
+			for x, y in ipairs(aqm.config.jailValues) do
 				FUN_SUBMENU_JAIL_AMOUNT:AddOption(y.Str, function() RunConsoleCommand("ulx", "jail", v:Name(), y.Len) end)
 			end
 		end
@@ -213,7 +235,7 @@ function aqm.showMenu()
 		for k,v in pairs(player.GetAll()) do
 			count = count + 1
 			local FUN_SUBMENU_SLAP_AMOUNT = FUN_SUBMENU_SLAP:AddSubMenu(v:Name())
-			for x, y in ipairs(aqm.defaultValues) do
+			for x, y in ipairs(aqm.config.defaultValues) do
 				FUN_SUBMENU_SLAP_AMOUNT:AddOption(y.Str, function() RunConsoleCommand("ulx", "slap", v:Name(), y.Len) end)
 			end
 		end
@@ -246,7 +268,7 @@ function aqm.showMenu()
 		for k,v in pairs(player.GetAll()) do
 			count = count + 1
 			local FUN_SUBMENU_WHIP_AMOUNT = FUN_SUBMENU_WHIP:AddSubMenu(v:Name())
-			for x, y in ipairs(aqm.defaultValues) do
+			for x, y in ipairs(aqm.config.defaultValues) do
 				FUN_SUBMENU_WHIP_AMOUNT:AddOption(y.Str, function() RunConsoleCommand("ulx", "whip", v:Name(), 10, y.Len) end)
 			end
 		end

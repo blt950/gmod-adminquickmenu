@@ -22,24 +22,44 @@ function aqm.hasAccess(ply, cmd)
 
 end
 
+hook.Add( "InitPostEntity", "aqm_load_interfaces", function()
 
-aqm.interfaces = {
-	
-	kick = {
-		compability = "ulx",
-		label = "Kick",
-		icon = "icon16/error.png",
-		hasAccess = aqm.hasAccess(),
-		draw = {
-			["ulx"] = {
-				playerSelect = true,
-				reasonSelect = true
+	aqm.interfaces = aqm.interfaces or {}
+	aqm.interfaces = {
+		
+		kick = {
+			compability = "ulx",
+			label = "Kick",
+			icon = "icon16/error.png",
+			hasAccess = aqm.hasAccess(),
+			draw = {
+				["ulx"] = {
+					playerSelect = true,
+					reasonSelect = true,
+					reasonTable = ulx.common_kick_reasons,
+					reasonCustom = true,
+					endPointFunc = function(ply, reason) RunConsoleCommand("ulx", "kick", ply:Name(), reason) end
+				}
+			}
+		},
+		
+		ban = {
+			compability = "ulx",
+			label = "Ban",
+			icon = "icon16/exclamation.png",
+			hasAccess = aqm.hasAccess(),
+			draw = {
+				["ulx"] = {
+					playerSelect = true,
+					timeSelect = true,
+					reasonSelect = true,
+					reasonTable = ulx.common_kick_reasons,
+					reasonCustom = true,
+					endPointFunc = function(ply, time, reason) RunConsoleCommand("ulx", "ban", ply:Name(), time, reason) end
+				}
 			}
 		}
-	},
-	
-	ban = {
-		compability = {"ulx", "fadmin"}
+
 	}
 
-}
+end)
