@@ -4,11 +4,7 @@
 	without permission.
 --]]
 
-
-aqm = aqm or {}
-aqm.config = aqm.config or {}
 aqm.version = "1.0"
-
 
 /*
 
@@ -28,7 +24,7 @@ aqm.config.banLengths = {
 }
 
 
-// Jail lengths. The number "Len" should be in minutes.
+// Jail lengths. The number "Len" should be in seconds.
 aqm.config.jailValues = {
 	{Len = 0, Str = "Infinity"},
 	{Len = 10, Str = "10 seconds"},
@@ -40,6 +36,17 @@ aqm.config.jailValues = {
 	{Len = 1800, Str = "30 minutes"}
 }
 
+// Ignite lengths. The number "Len" should be in seconds.
+aqm.config.igniteValues = {
+	{Len = 1, Str = "1 second"},
+	{Len = 5, Str = "5 seconds"},
+	{Len = 10, Str = "10 seconds"},
+	{Len = 15, Str = "15 seconds"},
+	{Len = 30, Str = "30 seconds"},
+	{Len = 60, Str = "1 minute"},
+	{Len = 120, Str = "2 minutes"},
+	{Len = 300, Str = "5 minutes"}
+}
 
 // Default values used for things such as how much to cloak and similar.
 aqm.config.defaultValues = {

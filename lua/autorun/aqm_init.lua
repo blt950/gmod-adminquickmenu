@@ -16,30 +16,35 @@
 
 */
 
+aqm = {}
+aqm.config = {}
 
 AddCSLuaFile("config/sh_config.lua")
 include("config/sh_config.lua")
 
 if SERVER then
+	AddCSLuaFile("aqm/cl_functions.lua")
 	AddCSLuaFile("aqm/cl_gui.lua")
-	AddCSLuaFile("aqm/cl_interfaces.lua")
+
+	AddCSLuaFile("aqm/gui/cl_ulx.lua")
+	AddCSLuaFile("aqm/gui/cl_fadmin.lua")
 else
+	include("aqm/cl_functions.lua")
 	include("aqm/cl_gui.lua")
-	include("aqm/cl_interfaces.lua")
+
+	include("aqm/gui/cl_ulx.lua")
+	include("aqm/gui/cl_fadmin.lua")
 end
-
-
-
 
 hook.Add( "InitPostEntity", "aqm_decide_admin_mod", function()
 	// Set the current admin mod
 	if istable(ulx) then
 		aqm.adminMod = "ulx"
-		print(":: Admin Quick Menu: Initalized with ULX as admin mod ::\n")
+		print(":: Admin Quick Menu "..aqm.version..": Initalized with ULX as admin mod ::\n")
 	elseif istable(FAdmin) then
 		aqm.adminMod = "fadmin"
-		print(":: Admin Quick Menu: Initalized with FAdmin as admin mod ::\n")
+		print(":: Admin Quick Menu "..aqm.version..": Initalized with FAdmin as admin mod ::\n")
 	else
-		ErrorNoHalt(":: Admin Quick Menu: No admin mod found. Make sure it's installed and supported by this plugin ::")
+		ErrorNoHalt(":: Admin Quick Menu "..aqm.version..": No admin mod found. Make sure it's installed and supported by this plugin ::")
 	end
 end )
