@@ -40,5 +40,5 @@ end
 function aqm.hideMenu()
 	CloseDermaMenus()
 end
-concommand.Add("+ULXqm", aqm.showMenu)
-concommand.Add("-ULXqm", aqm.hideMenu)
+concommand.Add("+aqm", aqm.showMenu)
+concommand.Add("-aqm", aqm.hideMenu)
