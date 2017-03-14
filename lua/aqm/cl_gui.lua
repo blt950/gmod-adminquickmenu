@@ -24,7 +24,7 @@ end
 
 function aqm.showMenu()
 	local menu = DermaMenu() 
-	menu:AddOption("Admin Quick Menu", function() chatMsg("by Blt950. Purchased from ScriptFodder.com\nActive admin mod: "..string.upper(aqm.adminMod)) end)
+	menu:AddOption("Admin Quick Menu", function() aqm.chatMsg("by Blt950. Purchased from ScriptFodder.com\nActive admin mod: "..string.upper(aqm.adminMod)) end)
 	menu:AddSpacer()
 
 	if aqm.adminMod == "ulx" then

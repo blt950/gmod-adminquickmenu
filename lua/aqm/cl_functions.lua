@@ -16,7 +16,7 @@
 
 */
 
-function hasAccess(cmd)
+function aqm.hasAccess(cmd)
 
 	if aqm.adminMod == "ulx" then
 		return LocalPlayer():query(cmd)
@@ -29,6 +29,10 @@ function hasAccess(cmd)
 	return false
 end	
 
-function chatMsg(string)
+function aqm.chatMsg(string)
 	chat.AddText(Color(200,100,100),"Admin Quick Menu v."..aqm.version..": "..string)
+end
+
+function string.capitalize(str)
+	return (str:gsub("^%l", string.upper))
 end

@@ -48,8 +48,8 @@ aqm.config.igniteValues = {
 	{Len = 300, Str = "5 minutes"}
 }
 
-// Default values used for things such as how much to cloak and similar.
-aqm.config.defaultValues = {
+// [ULX ONLY] Default values used for things such as how much to cloak and similar.
+aqm.config.defaultValues_ULX = {
 	{Len = 0, Str = "0"},
 	{Len = 1, Str = "1"},
 	{Len = 25, Str = "25"},
@@ -57,4 +57,16 @@ aqm.config.defaultValues = {
 	{Len = 75, Str = "75"},
 	{Len = 100, Str = "100"},
 	{Len = 255, Str = "255"}
+}
+
+// [FADMIN ONLY] Default values used for things such as lengths of freezes, mutes and similar.
+aqm.config.defaultValues_FADMIN = {
+	{Len = 0, Str = "Infinity"},
+	{Len = 10, Str = "10 seconds"},
+	{Len = 60, Str = "1 minute"},
+	{Len = 180, Str = "3 minutes"},
+	{Len = 300, Str = "5 minutes"},
+	{Len = 600, Str = "10 minutes"},
+	{Len = 900, Str = "15 minutes"},
+	{Len = 1800, Str = "30 minutes"}
 }
